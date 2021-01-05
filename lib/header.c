@@ -475,14 +475,16 @@ static int dataLength(rpm_tagtype_t type, rpm_constdata_t p, rpm_count_t count,
  * @param dataStart	header data start
  * @param dataEnd	header data end
  * @param regionid	region offset
- * @param fast		use offsets for data sizes if possible
+ * @param assume_data_valid
+ * 			use offsets for data sizes if possible; this is faster,
+ *  			but causes undefined behavior if the data is not valid.
  * @return		no. bytes of data in region, -1 on error
  */
 static int regionSwab(indexEntry entry, int il, int dl,
 		entryInfo pe,
 		unsigned char * dataStart,
 		const unsigned char * dataEnd,
-		int regionid, int fast)
+		int regionid, int assume_data_valid)
 {
     if ((entry != NULL && regionid >= 0) || (entry == NULL && regionid != 0))
 	return -1;
