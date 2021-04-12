@@ -475,7 +475,7 @@ static int dataLength(rpm_tagtype_t type, rpm_constdata_t p, rpm_count_t count,
 	break;
 
     default:
-	if (typeSizes[type] == -1)
+	if (type > RPM_MAX_TYPE || typeSizes[type] < 0)
 	    return -1;
 	length = typeSizes[type] * count;
 	if (length < 0 || (se && length > se - s))
